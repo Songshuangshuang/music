@@ -1,0 +1,184 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;;
+}
+body {
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+.wrapper {
+    position: relative;
+    width: 100%;//100vw
+    height: 100vh;//高分成100份，1vh是一份；
+    padding-top: 60px;
+    box-sizing: border-box;//怪异模式盒模型
+    background-color: rgba(0,0,0,.3); 
+    .img-wrapper {
+        width: 50%;
+        height: 0;
+        padding-top: 50%;//用padding撑开高度 父集的宽度的50%  ???
+        position: relative;
+        margin: 0 auto;
+        .song-img {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            img {
+                width: 100%;
+                height: 100%;
+            }
+        }
+    }
+    .song-info {
+        width: 100%;
+        height: 126px;
+        margin-top: 40px;
+        text-align: center;
+        .song-name {
+            font-size: 24px;
+            line-height: 36px;
+            margin-bottom: 8px;
+            color: rgba(255,255,255,.86);
+            overflow: hidden;
+            text-overflow:ellipsis;
+            white-space: nowrap;
+        }
+        .singer-name,.album-name {
+            font-size: 15px;
+            line-height: 16px;
+            margin-bottom: 6px;
+            color: rgba(255,255,255,.6);
+        }
+    }
+    .proccess {
+        display:flex;    //在同一水平线上
+        .cur-time,.all-time {
+            font-size: 16px;
+            line-height: 40px;
+            text-align: center;
+            width: 60px;
+            height: 40px;
+            color: #fff;
+        }
+        .pro-wrapper {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            padding-left: 2px;      //因为overflow:hidden 为了让小圆点左边露出来
+            padding-right: 2px;     //同上--------------------------右边-----
+            .pro-bottom,.pro-top {
+                position: absolute;
+                height: 1px;
+                width: 100%;
+                top:20px;
+            }
+            .pro-bottom {
+                background-color: rgba(255,255,255,.3);
+            }
+            .pro-top {
+                background-color: #fff;
+                transform: translateX(-100%);
+                .slider-point {
+                    position: absolute;
+                    width: 20px;
+                    height: 20px;
+                    right: -10px;
+                    top: -9px;
+                    display: flex;
+                    justify-content: center;//单个元素水平局中
+                    align-items: center; //垂直局中
+                }
+                .slider-point::after {   //伪元素
+                    content: "";
+                    width: 5px;
+                    height: 5px;
+                    border-radius: 50%;
+                    background-color: #fff;
+                    display: block;      //伪元素默认为display：inline-block；
+                }
+            }
+        }
+    }
+    .song-control {
+        position: absolute;
+        height: 50px;
+        width: 100%;
+        bottom: 0;
+        background-color: rgba(0,0,0,.2);
+        display: flex;
+        .btn {
+            flex:1;
+            background-size: 20px 20px;
+            background-position: 50%;
+            background-repeat: no-repeat;  
+        }
+        //??????????????????????????????????
+        .like-btn {
+            background-image: url("/img/icon-like.png");
+            &.like {
+                background-image: url('/img/icon-like-solid.png');
+            }
+        }
+        .prev-btn {
+            background-image: url("/img/icon-prev.png");
+        }
+        .play-btn {
+            background-image: url("/img/icon-play.png");
+            &.playing {
+                background-image: url("/img/icon-pause.png");
+            }
+        }
+        .next-btn {
+            background-image: url("/img/icon-next.png");
+        }
+        .list-btn {
+            background-image: url("/img/icon-list.png");
+        }
+    }
+}
+.list-wrapper {
+    background-color: #fff;
+    position: fixed;//相对当前窗口定位
+    bottom : 0;
+    width: 100%;
+    transform: translateY(100%);
+    transition: transform 200ms ease-in;
+    &.show {
+        transform: translateY(0);
+    }
+    .list-header,.close-btn {
+        height: 50px;
+        line-height: 50px;
+        text-align: center;
+        color:rgba(0,0,0,.86)
+    }
+    .close-btn {
+        border-top:1px solid rgba(0,0,0,.1);
+    }
+    li {
+        height: 20px;
+        padding: 10px;
+        border-top: 1px solid rgba(0,0,0,.1); 
+        h3 {
+            color:rgba(0,0,0,.6);
+            font-size: 14px;
+            span {
+                font-size: 12px;
+            }
+        }
+        &.showList {
+            h3 {
+                color: rgba(255,0,0,.86);
+                span {
+                    color: rgba(255,0,0,.7);
+                }
+            }
+        }
+        
+    }
+
+}
